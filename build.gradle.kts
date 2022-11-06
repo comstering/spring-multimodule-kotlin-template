@@ -1,14 +1,19 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.io.ByteArrayOutputStream
+
+val serviceName: String by project
+val groupName: String by project
 
 plugins {
-	id("org.springframework.boot") version "2.7.5"
-	id("io.spring.dependency-management") version "1.0.15.RELEASE"
-	kotlin("jvm") version "1.6.21"
-	kotlin("plugin.spring") version "1.6.21"
+	id("org.springframework.boot")
+	id("io.spring.dependency-management")
+	kotlin("jvm")
+	kotlin("plugin.spring")
+	id("com.google.cloud.tools.jib")
 }
 
-group = "com.example"
-version = "0.0.1-SNAPSHOT"
+group = groupName
+version = getGitHash()
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {
@@ -29,6 +34,23 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+// About jib
+fun getGitHash(): String {
+	val stdout = ByteArrayOutputStream()
+	exec {
+		commandLine = listOf("git", "rev-parse", "--short", "HEAD")
+		standardOutput = stdout
+	}
+	return stdout.toString().trim()
+}
+
+jib {
+	to {
+		image = "imageRepoPath/$serviceName"
+		tags = setOf("$version", "latest")
+	}
 }
 
 tasks.withType<KotlinCompile> {
