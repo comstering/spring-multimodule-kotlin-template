@@ -1,4 +1,5 @@
-rootProject.name = "demo"
+val serviceName: String by settings
+rootProject.name = serviceName
 
 pluginManagement {
     val springBootVersion: String by settings
@@ -14,3 +15,5 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jibVersion
     }
 }
+
+include("infrastructure")
