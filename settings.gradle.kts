@@ -17,3 +17,4 @@ pluginManagement {
 }
 
 include("infrastructure")
+include("domain")
