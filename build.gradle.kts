@@ -3,6 +3,7 @@ import java.io.ByteArrayOutputStream
 
 val serviceName: String by project
 val groupName: String by project
+val kotestVersion: String by project
 
 plugins {
 	id("org.springframework.boot")
@@ -12,9 +13,22 @@ plugins {
 	id("com.google.cloud.tools.jib")
 }
 
-group = groupName
-version = getGitHash()
-java.sourceCompatibility = JavaVersion.VERSION_11
+allprojects {
+	group = groupName
+	version = getGitHash()
+
+	apply {
+		plugin("kotlin")
+		plugin("kotlin-spring")
+		plugin("org.springframework.boot")
+		plugin("io.spring.dependency-management")
+		plugin("com.google.cloud.tools.jib")
+	}
+
+	repositories {
+		mavenCentral()
+	}
+}
 
 configurations {
 	compileOnly {
@@ -22,18 +36,24 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
+subprojects {
+	java.sourceCompatibility = JavaVersion.VERSION_11
 
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	compileOnly("org.projectlombok:lombok")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-actuator")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		compileOnly("org.projectlombok:lombok")
+		developmentOnly("org.springframework.boot:spring-boot-devtools")
+		annotationProcessor("org.projectlombok:lombok")
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+		// kotest
+		testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+		testImplementation("io.kotest:kotest-property:$kotestVersion")
+		testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
+
+	}
 }
 
 // About jib
