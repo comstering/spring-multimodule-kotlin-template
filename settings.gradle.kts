@@ -19,3 +19,4 @@ pluginManagement {
 include("infrastructure")
 include("domain")
 include("service")
+include("application")
