@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream
 val serviceName: String by project
 val groupName: String by project
 val kotestVersion: String by project
+val imageRegistry: String by project
 
 plugins {
 	id("org.springframework.boot")
@@ -68,7 +69,7 @@ fun getGitHash(): String {
 
 jib {
 	to {
-		image = "imageRepoPath/$serviceName"
+		image = "$imageRegistry/$serviceName"
 		tags = setOf("$version", "latest")
 	}
 }
