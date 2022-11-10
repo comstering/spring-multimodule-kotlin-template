@@ -1,0 +1,27 @@
+name: Feature Test
+
+on:
+  push:
+    branches: [ feature/** ]
+
+jobs:
+  unittest:
+    name: Unit Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 현재 코드 레포지토리 업로드
+      - name: Checkout my code
+        uses: actions/checkout@v3
+
+      # Java jdk 설치
+      - name: Set up jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'termurin'
+          java-version: '11'
+
+      # 유닛 테스트
+      - name: Run unit test
+        run: |
+          ./gradlew test
