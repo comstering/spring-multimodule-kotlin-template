@@ -70,7 +70,7 @@ fun getGitHash(): String {
 jib {
 	to {
 		image = "$imageRegistry/$serviceName"
-		tags = setOf("$version", "latest")
+		tags = setOf("$version")
 	}
 }
 
