@@ -1,0 +1,70 @@
+name: Preview Deploy
+
+on:
+  push:
+    branches: [ develop, bugfix/** ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  unittest:
+    name: Unit Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 현재 코드 레포지토리 업로드
+      - name: Checkout my code
+        uses: actions/checkout@v3
+
+      # Java jdk 설치
+      - name: Set up jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'termurin'
+          java-version: '11'
+
+      # 유닛 테스트
+      - name: Run unit Test
+        run: |
+          ./gradlew test
+
+  build:
+    name: JIB Build
+    runs-on: ubuntu-latest
+    needs: unittest
+
+    steps:
+      # 현재 코드 레포지토리 업로드
+      - name: Checkout my code
+        uses: actions/checkout@v3
+
+      # Docker Hub 로그인
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Java jdk 설치
+      - name: Set up jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'termurin'
+          java-version: '11'
+
+      # JIB Build
+      - name: JIB Build
+        run: |
+          ./gradlew jib
+
+  deploy:
+    # Todo: I write deploy script after
+    name: Deploy preview
+    runs-on: ubuntu-latest
+    needs: build
+    environment: preview
+
+    steps:
+      - name: Deploy to preview
+        run: |
+          echo '${{ github.sha }}'
