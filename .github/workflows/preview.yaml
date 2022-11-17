@@ -55,7 +55,7 @@ jobs:
       # JIB Build
       - name: JIB Build
         run: |
-          ./gradlew service:jib
+          ./gradlew application:jib
 
   deploy:
     # Todo: I write deploy script after

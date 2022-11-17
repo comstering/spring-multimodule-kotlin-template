@@ -54,9 +54,10 @@ jobs:
       # JIB Build
       - name: JIB Build
         run: |
-          ./gradlew service:jib
+          ./gradlew application:jib
 
   deploy:
+    # Todo: I write deploy script after
     name: Deploy production
     runs-on: ubuntu-latest
     needs: build
