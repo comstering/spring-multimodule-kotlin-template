@@ -1,10 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.ByteArrayOutputStream
 
-val serviceName: String by project
 val groupName: String by project
 val kotestVersion: String by project
-val imageRegistry: String by project
 
 plugins {
 	id("org.springframework.boot")
@@ -57,7 +55,6 @@ subprojects {
 	}
 }
 
-// About jib
 fun getGitHash(): String {
 	val stdout = ByteArrayOutputStream()
 	exec {
@@ -65,13 +62,6 @@ fun getGitHash(): String {
 		standardOutput = stdout
 	}
 	return stdout.toString().trim()
-}
-
-jib {
-	to {
-		image = "$imageRegistry/$serviceName"
-		tags = setOf("$version")
-	}
 }
 
 tasks.withType<KotlinCompile> {
