@@ -18,7 +18,7 @@ jobs:
       - name: Set up jdk
         uses: actions/setup-java@v3
         with:
-          distribution: 'termurin'
+          distribution: 'temurin'
           java-version: '11'
 
       # Unit Test
