@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream
 val groupName: String by project
 val kotestVersion: String by project
 
+val springdocOpenapiVersion: String by project
+
 plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
@@ -41,6 +43,7 @@ subprojects {
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-actuator")
 		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 		compileOnly("org.projectlombok:lombok")
