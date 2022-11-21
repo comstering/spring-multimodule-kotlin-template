@@ -11,6 +11,7 @@ plugins {
 	id("io.spring.dependency-management")
 	kotlin("jvm")
 	kotlin("plugin.spring")
+	jacoco
 	id("com.google.cloud.tools.jib")
 }
 
@@ -23,7 +24,12 @@ allprojects {
 		plugin("kotlin-spring")
 		plugin("org.springframework.boot")
 		plugin("io.spring.dependency-management")
+		plugin("jacoco")
 		plugin("com.google.cloud.tools.jib")
+	}
+
+	jacoco {
+		toolVersion = "0.8.8"
 	}
 
 	repositories {
@@ -58,6 +64,44 @@ subprojects {
 		testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
 
 	}
+
+	tasks.withType<Test> {
+		useJUnitPlatform()
+		finalizedBy(tasks.withType<JacocoReport>())
+	}
+
+	tasks.withType<JacocoReport> {
+		dependsOn(tasks.withType<Test>())
+
+		reports {
+			html.required.set(true)
+			xml.required.set(true)
+			csv.required.set(false)
+		}
+		finalizedBy(tasks.withType<JacocoCoverageVerification>())
+	}
+
+	tasks.withType<JacocoCoverageVerification> {
+		dependsOn(tasks.withType<JacocoReport>())
+		val excludeJacocoClassNamePatterns = mutableListOf<String>().apply {
+			for (pattern in 'A'..'Z') {
+				add("*.Q$pattern")
+			}
+		}
+
+		violationRules {
+			rule {
+				excludes = listOf<String>() + excludeJacocoClassNamePatterns
+			}
+		}
+	}
+
+	tasks.withType<KotlinCompile> {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "11"
+		}
+	}
 }
 
 fun getGitHash(): String {
@@ -67,15 +111,4 @@ fun getGitHash(): String {
 		standardOutput = stdout
 	}
 	return stdout.toString().trim()
-}
-
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
-	}
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
 }
