@@ -7,7 +7,6 @@ val imageRegistry: String by project
 val serviceName: String by project
 
 dependencies {
-    implementation(project(":infrastructure"))
     implementation(project(":service"))
 }
 
