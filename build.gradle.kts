@@ -85,12 +85,26 @@ subprojects {
 		dependsOn(tasks.withType<JacocoReport>())
 		val excludeJacocoClassNamePatterns = mutableListOf<String>().apply {
 			for (pattern in 'A'..'Z') {
-				add("*.Q$pattern")
+				add("*.Q${pattern}*")
 			}
 		}
 
 		violationRules {
 			rule {
+				element = "CLASS"
+
+				limit {
+					counter = "BRANCH"
+					value = "COVEREDRATIO"
+					minimum = 0.00.toBigDecimal()
+				}
+
+				limit {
+					counter = "LINE"
+					value = "COVEREDRATIO"
+					minimum = 0.00.toBigDecimal()
+				}
+
 				excludes = listOf<String>() + excludeJacocoClassNamePatterns
 			}
 		}
