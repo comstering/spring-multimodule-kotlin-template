@@ -12,6 +12,7 @@ plugins {
 	kotlin("jvm")
 	kotlin("plugin.spring")
 	jacoco
+	id("com.github.kt3k.coveralls")
 	id("com.google.cloud.tools.jib")
 }
 
