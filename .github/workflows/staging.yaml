@@ -21,17 +21,16 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # 유닛 테스트
-      - name: Run unit Test
+      # Coveralls repo token 등록
+      - name: Set coveralls repo token in environment
+        run: echo "COVERALLS_REPO_TOKEN=${{ secrets.COVERALLS_REPO_TOKEN }}" >> $GITHUB_ENV
+
+      # 테스트 & Coverage 측정
+      - name: Run test
         run: |
           ./gradlew test
           ./gradlew coveralls
 
-      # Coverage 측정
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
 
   build:
     name: JIB Build
