@@ -159,7 +159,7 @@ tasks.register<JacocoReport>("jacocoAllReport") {
 }
 
 coveralls {
-	jacocoReportPath = "${projectDir}/build/jacocoAllReport/jacocoAllReport.xml"
+	jacocoReportPath = "${projectDir}/build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml"
 	sourceDirs = subprojects.map { it.sourceSets.main.get().allSource.srcDirs.toList() }
 		.toList().flatten().map { relativePath(it) }
 }
