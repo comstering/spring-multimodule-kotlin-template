@@ -21,9 +21,21 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # 테스트
-      - name: Run test
-        run: ./gradlew test
+      # 테스트 & Coverage report 생성
+      - name: Run test & Make coverage report
+        run: |
+          ./gradlew clean
+          ./gradlew test
+          ./gradlew jacocoAllReport
+
+      # Coverage 측정 (use codecov)
+      - name: Run Coverage measurement (use codecov)
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./build/reports/jacoco/jacocoAllReport
+          files: ./jacocoAllReport.xml
+          fail_ci_if_error: true
 
       # Coveralls repo token 등록
       - name: Set coveralls repo token in environment
@@ -31,8 +43,9 @@ jobs:
 
       # Coverage 측정 (use coveralls)
       - name: Run Coverage measurement (use coveralls)
-        run: ./gradlew coveralls
-
+        run: |
+          ./gradlew clean
+          ./gradlew coveralls
 
   build:
     name: JIB Build
