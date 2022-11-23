@@ -6,8 +6,8 @@ on:
     tags: [ v* ]
 
 jobs:
-  unittest:
-    name: Unit Test
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -22,21 +22,22 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
+      # 테스트
+      - name: Run test
+        run: ./gradlew test
+
       # Coveralls repo token 등록
       - name: Set coveralls repo token in environment
         run: echo "COVERALLS_REPO_TOKEN=${{ secrets.COVERALLS_REPO_TOKEN }}" >> $GITHUB_ENV
 
-      # 테스트 & Coverage 측정
-      - name: Run test
-        run: |
-          ./gradlew test
-          ./gradlew coveralls
-
+      # Coverage 측정 (use coveralls)
+      - name: Run Coverage measurement (use coveralls)
+        run: ./gradlew coveralls
 
   build:
     name: JIB Build
     runs-on: ubuntu-latest
-    needs: unittest
+    needs: test
 
     steps:
       # 현재 코드 레포지토리 업로드
