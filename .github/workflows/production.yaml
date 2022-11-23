@@ -34,8 +34,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./build/reports/jacoco/jacocoAllReport
-          files: ./jacocoAllReport.xml
+          files: ./build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml
           fail_ci_if_error: true
 
       # Coveralls repo token 등록
