@@ -126,3 +126,33 @@ fun getGitHash(): String {
 	}
 	return stdout.toString().trim()
 }
+
+tasks.register<JacocoReport>("jacocoAllReport") {
+	val currentTask = this
+
+	val allSourceSrcDirs = mutableListOf<Set<File>>()
+	val outputDirectories = mutableListOf<SourceSetOutput>()
+
+	subprojects {
+		val subproject = this
+		subproject.plugins.withType<JacocoPlugin>().configureEach {
+			subproject.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.forEach {
+				currentTask.dependsOn(it)
+			}
+		}
+
+		allSourceSrcDirs.add(subproject.sourceSets.main.get().allSource.srcDirs)
+		outputDirectories.add(subproject.sourceSets.main.get().output)
+	}
+
+	additionalSourceDirs.setFrom(allSourceSrcDirs)
+	sourceDirectories.setFrom(allSourceSrcDirs)
+	classDirectories.setFrom(outputDirectories)
+	executionData.setFrom(fileTree(projectDir).include("**/jacoco/*.exec"))
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+		csv.required.set(false)
+	}
+}
