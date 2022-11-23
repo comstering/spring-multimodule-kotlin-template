@@ -157,3 +157,13 @@ tasks.register<JacocoReport>("jacocoAllReport") {
 		csv.required.set(false)
 	}
 }
+
+coveralls {
+	jacocoReportPath = "${projectDir}/build/jacocoAllReport/jacocoAllReport.xml"
+	sourceDirs = subprojects.map { it.sourceSets.main.get().allSource.srcDirs.toList() }
+		.toList().flatten().map { relativePath(it) }
+}
+
+tasks.withType<org.kt3k.gradle.plugin.coveralls.CoverallsTask> {
+	dependsOn(tasks["jacocoAllReport"])
+}
