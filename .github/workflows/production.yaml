@@ -22,11 +22,17 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # Unit Test
+      # 유닛 테스트
       - name: Run unit Test
         run: |
           ./gradlew test
           ./gradlew coveralls
+
+      # Coverage 측정
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
 
   build:
     name: JIB Build
