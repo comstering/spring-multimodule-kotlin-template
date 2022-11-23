@@ -27,6 +27,7 @@ jobs:
       - name: Run unit Test
         run: |
           ./gradlew test
+          ./gradlew coveralls
 
   build:
     name: JIB Build
