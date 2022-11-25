@@ -80,6 +80,17 @@ subprojects {
 			csv.required.set(false)
 		}
 
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.map {
+				fileTree(it).apply {
+					exclude("**/DemoApplication**")
+					for (pattern in 'A' .. 'Z') {
+						exclude("**/${pattern}**")
+					}
+				}
+			}))
+		}
+
 		finalizedBy(tasks.withType<JacocoCoverageVerification>())
 	}
 
@@ -107,7 +118,7 @@ subprojects {
 					minimum = 0.50.toBigDecimal()
 				}
 
-				excludes = listOf<String>("**DemoApplication**") + excludeJacocoClassNamePatterns
+				excludes = listOf<String>("**.DemoApplication**") + excludeJacocoClassNamePatterns
 			}
 		}
 	}
