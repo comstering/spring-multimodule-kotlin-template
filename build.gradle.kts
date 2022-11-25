@@ -156,6 +156,17 @@ tasks.register<JacocoReport>("jacocoAllReport") {
 
 		allSourceSrcDirs.add(subproject.sourceSets.main.get().allSource.srcDirs)
 		outputDirectories.add(subproject.sourceSets.main.get().output)
+
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.map {
+				fileTree(it).apply {
+					exclude("**/DemoApplication**")
+					for (pattern in 'A' .. 'Z') {
+						exclude("**/${pattern}**")
+					}
+				}
+			}))
+		}
 	}
 
 	additionalSourceDirs.setFrom(allSourceSrcDirs)
