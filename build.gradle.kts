@@ -79,6 +79,7 @@ subprojects {
 			xml.required.set(true)
 			csv.required.set(false)
 		}
+
 		finalizedBy(tasks.withType<JacocoCoverageVerification>())
 	}
 
@@ -97,16 +98,16 @@ subprojects {
 				limit {
 					counter = "BRANCH"
 					value = "COVEREDRATIO"
-					minimum = 0.00.toBigDecimal()
+					minimum = 0.50.toBigDecimal()
 				}
 
 				limit {
 					counter = "LINE"
 					value = "COVEREDRATIO"
-					minimum = 0.00.toBigDecimal()
+					minimum = 0.50.toBigDecimal()
 				}
 
-				excludes = listOf<String>() + excludeJacocoClassNamePatterns
+				excludes = listOf<String>("**DemoApplication**") + excludeJacocoClassNamePatterns
 			}
 		}
 	}
