@@ -9,20 +9,12 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class Swagger2Config {
-
     @Bean
-    fun publicApi() = GroupedOpenApi.builder()
-        .group("swagger-api")
-        .pathsToMatch("/swagger/api/**")
-        .build()!!
-
-    @Bean
-    fun swaggerOpenApi() = OpenAPI()
-        .components(Components())
+    fun swaggerOpenApi(): OpenAPI = OpenAPI()
         .info(
             Info()
                 .title("Swagger API")
                 .description("Show swagger api")
                 .version("v1")
-    )!!
+    )
 }
