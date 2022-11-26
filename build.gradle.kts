@@ -54,8 +54,11 @@ subprojects {
 
 		// Spring
 		implementation("org.springframework.boot:spring-boot-starter-actuator")
+		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 		implementation("org.springframework.boot:spring-boot-starter-validation")
 		implementation("org.springframework.boot:spring-boot-starter-web")
+
+		// Swagger
 		implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
 		implementation("org.springdoc:springdoc-openapi-kotlin:$springdocOpenapiVersion")
 
@@ -68,7 +71,6 @@ subprojects {
 		testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 		testImplementation("io.kotest:kotest-property:$kotestVersion")
 		testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
-
 	}
 
 	tasks.withType<Test> {
