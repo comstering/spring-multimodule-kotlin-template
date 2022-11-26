@@ -48,12 +48,17 @@ subprojects {
 	java.sourceCompatibility = JavaVersion.VERSION_11
 
 	dependencies {
+		// Kotlin
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+		// Spring
 		implementation("org.springframework.boot:spring-boot-starter-actuator")
+		implementation("org.springframework.boot:spring-boot-starter-validation")
 		implementation("org.springframework.boot:spring-boot-starter-web")
 		implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
 		implementation("org.springdoc:springdoc-openapi-kotlin:$springdocOpenapiVersion")
-		implementation("org.jetbrains.kotlin:kotlin-reflect")
-		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
 		compileOnly("org.projectlombok:lombok")
 		developmentOnly("org.springframework.boot:spring-boot-devtools")
 		annotationProcessor("org.projectlombok:lombok")
