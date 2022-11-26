@@ -109,13 +109,13 @@ subprojects {
 				limit {
 					counter = "BRANCH"
 					value = "COVEREDRATIO"
-					minimum = 0.50.toBigDecimal()
+					minimum = 0.80.toBigDecimal()
 				}
 
 				limit {
 					counter = "LINE"
 					value = "COVEREDRATIO"
-					minimum = 0.50.toBigDecimal()
+					minimum = 0.80.toBigDecimal()
 				}
 
 				excludes = listOf<String>("**.DemoApplication**") + excludeJacocoClassNamePatterns
