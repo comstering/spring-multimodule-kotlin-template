@@ -3,6 +3,7 @@ import java.io.ByteArrayOutputStream
 
 val groupName: String by project
 val kotestVersion: String by project
+val springMockkVersion: String by project
 
 val springdocOpenapiVersion: String by project
 
@@ -65,6 +66,7 @@ subprojects {
 		developmentOnly("org.springframework.boot:spring-boot-devtools")
 		annotationProcessor("org.projectlombok:lombok")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
 
 		// kotest
 		testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
