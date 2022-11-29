@@ -12,38 +12,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 현재 코드 레포지토리 업로드
       - name: Checkout my code
         uses: actions/checkout@v3
 
-      # Java jdk 설치
       - name: Set up jdk
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      # 테스트 & Coverage report 생성
       - name: Run test & Make coverage report
         run: |
           ./gradlew clean
           ./gradlew test
           ./gradlew jacocoAllReport
 
-      # Coverage 측정 (use codecov)
-      - name: Run Coverage measurement (use codecov)
+      - name: Run coverage measurement (use codecov)
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml
           fail_ci_if_error: true
 
-      # Coveralls repo token 등록
-      - name: Set coveralls repo token in environment
+      - name: Set up coveralls repo token in environment
         run: echo "COVERALLS_REPO_TOKEN=${{ secrets.COVERALLS_REPO_TOKEN }}" >> $GITHUB_ENV
 
-      # Coverage 측정 (use coveralls)
-      - name: Run Coverage measurement (use coveralls)
+      - name: Run coverage measurement (use coveralls)
         run: |
           ./gradlew clean
           ./gradlew coveralls
@@ -54,25 +48,21 @@ jobs:
     needs: test
 
     steps:
-      # 현재 코드 레포지토리 업로드
       - name: Checkout my code
         uses: actions/checkout@v3
 
-      # Docker Hub 로그인
-      - name: Login to DockerHub
+      - name: Sign in DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Java jdk 설치
       - name: Set up jdk
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      # JIB Build
       - name: JIB Build
         run: |
           ./gradlew application:jib
