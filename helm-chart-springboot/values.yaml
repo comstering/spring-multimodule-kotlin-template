@@ -1,14 +1,19 @@
-# Default values for chart-springboot.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+container:
+  healthCheck: /actuator/health
+  initialDelaySecond: 30
+  activeProfile: "local"
+  replicas: 1
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: comstering  # Change this to your image repository(i.e. docker hub or ecr)
+  name: demo              # Change this to your image name
+  tag: ""                 # Change this to your image tag, Overrides the image tag whose default is the chart appVersion.
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # IfNotPresent | Always
+  # IfNotPresent: Don't pull the image if it already exists
+  # Always: Always pull the image
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,7 +43,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
+  containerPort: 8080
 
 ingress:
   enabled: false
@@ -71,9 +77,9 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 1
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

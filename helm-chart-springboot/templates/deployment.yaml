@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "chart-springboot.fullname" . }}
+  name: {{ include "springboot-server.fullname" . }}
   labels:
-    {{- include "chart-springboot.labels" . | nindent 4 }}
+    {{- include "springboot-server.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "chart-springboot.selectorLabels" . | nindent 6 }}
+      {{- include "springboot-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "chart-springboot.selectorLabels" . | nindent 8 }}
+        {{- include "springboot-server.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "chart-springboot.serviceAccountName" . }}
+      serviceAccountName: {{ include "springboot-server.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -35,11 +35,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.container.healthCheck }}
               port: http
           readinessProbe:
             httpGet:

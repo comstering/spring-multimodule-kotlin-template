@@ -3,5 +3,3 @@ name: springboot-service  # Change this to your service name
 description: A Helm chart for Spring Boot Service # Change this to your service description
 type: application
 version: 0.1.0
-# If you need app version, you can add it here.
-# appVersion: "1.16.0"
