@@ -6,8 +6,13 @@ metadata:
     {{- include "springboot-server.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.container.replicas }}
   {{- end }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 50%
   selector:
     matchLabels:
       {{- include "springboot-server.selectorLabels" . | nindent 6 }}
@@ -29,8 +34,9 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+          env:
+            - name: SPRING_BOOT_PROFILES
+              value: {{ .Values.container.activeProfile }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -43,7 +49,7 @@ spec:
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.container.healthCheck }}
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
