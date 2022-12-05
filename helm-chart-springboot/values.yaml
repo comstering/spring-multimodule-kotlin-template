@@ -1,3 +1,5 @@
+namespace: template
+
 container:
   healthCheck: /actuator/health
   initialDelaySecond: 30
