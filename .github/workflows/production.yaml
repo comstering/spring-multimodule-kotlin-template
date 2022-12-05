@@ -84,3 +84,4 @@ jobs:
           config-files: helm-chart-springboot/values.yaml
           chart-path: helm-chart-springboot
           namespace: template
+          name: springboot-server
