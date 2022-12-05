@@ -85,3 +85,5 @@ jobs:
           chart-path: helm-chart-springboot
           namespace: template
           name: springboot-server
+      - name: Check config
+        run: cat .kube/config
