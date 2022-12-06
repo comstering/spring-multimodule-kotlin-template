@@ -74,6 +74,12 @@ jobs:
     environment: production
 
     steps:
+      - name: Checkout my code
+        uses: actions/checkout@v3
+
+      - name: check pwd
+        run: pwd
+
       - name: Deploy to production
         uses: bitovi/github-actions-deploy-eks-helm@v1.1.0
         with:
