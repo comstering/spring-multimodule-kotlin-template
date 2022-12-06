@@ -82,8 +82,6 @@ jobs:
           aws-region: ap-northeast-2
           cluster-name: mycluster
           config-files: helm-chart-springboot/values.yaml
-          chart-path: helm-chart-springboot
+          chart-path: helm-chart-springboot/
           namespace: template
           name: springboot-server
-      - name: Check config
-        run: cat .kube/config
