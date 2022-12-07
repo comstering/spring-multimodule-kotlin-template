@@ -80,14 +80,14 @@ jobs:
       - name: check pwd
         run: pwd
 
-      - name: Deploy to production
-        uses: bitovi/github-actions-deploy-eks-helm@v1.1.0
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
-          cluster-name: mycluster
-          config-files: helm-chart-springboot/values.yaml
-          chart-path: helm-chart-springboot/
-          namespace: template
-          name: springboot-server
+#      - name: Deploy to production
+#        uses: bitovi/github-actions-deploy-eks-helm@v1.1.0
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          aws-region: ap-northeast-2
+#          cluster-name: ${{ secrets.EKS_CLUSTER_NAME }}
+#          config-files: helm-chart-springboot/values.yaml
+#          chart-path: helm-chart-springboot/
+#          namespace: ${{ secrets.EKS_NAMESPACE }}
+#          name: springboot-server
