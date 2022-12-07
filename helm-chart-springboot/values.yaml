@@ -9,7 +9,7 @@ container:
 image:
   repository: comstering  # Change this to your image repository(i.e. docker hub or ecr)
   name: demo              # Change this to your image name
-  tag: "latest"           # Change this to your image tag, Overrides the image tag whose default is the chart appVersion.
+  tag: "develop"           # Change this to your image tag, Overrides the image tag whose default is the chart appVersion.
   pullPolicy: Always
   # IfNotPresent | Always
   # IfNotPresent: Don't pull the image if it already exists
@@ -46,7 +46,6 @@ service:
 
 ingress:
   enabled: false
-  className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
