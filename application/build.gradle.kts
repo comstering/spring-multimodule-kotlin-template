@@ -5,13 +5,9 @@ version = rootProject.version
 
 val imageRegistry: String by project
 val serviceName: String by project
-val springCloudEurekaClientVersion: String by rootProject
 
 dependencies {
     implementation(project(":service"))
-
-    // Spring Cloud
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:$springCloudEurekaClientVersion")
 }
 
 jib {

@@ -5,6 +5,11 @@ val groupName: String by project
 val kotestVersion: String by project
 val springMockkVersion: String by project
 
+val springCloudOpenFeignVersion: String by project
+val springCloudHystrixVersion: String by project
+val springCloudRibbonVersion: String by project
+val springCloudEurekaClientVersion: String by project
+
 val springdocOpenapiVersion: String by project
 
 plugins {
@@ -57,6 +62,12 @@ subprojects {
 		implementation("org.springframework.boot:spring-boot-starter-actuator")
 		implementation("org.springframework.boot:spring-boot-starter-validation")
 		implementation("org.springframework.boot:spring-boot-starter-web")
+
+		// Spring Cloud
+		implementation("org.springframework.cloud:spring-cloud-starter-openfeign:$springCloudOpenFeignVersion")
+		implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix:$springCloudHystrixVersion")
+		implementation("org.springframework.cloud:spring-cloud-starter-netflix-ribbon:$springCloudRibbonVersion")
+
 
 		// Swagger
 		implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
