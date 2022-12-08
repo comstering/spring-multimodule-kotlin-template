@@ -10,8 +10,6 @@ val springCloudHystrixVersion: String by project
 val springCloudRibbonVersion: String by project
 val springCloudEurekaClientVersion: String by project
 
-val springdocOpenapiVersion: String by project
-
 plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
@@ -67,11 +65,6 @@ subprojects {
 		implementation("org.springframework.cloud:spring-cloud-starter-openfeign:$springCloudOpenFeignVersion")
 		implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix:$springCloudHystrixVersion")
 		implementation("org.springframework.cloud:spring-cloud-starter-netflix-ribbon:$springCloudRibbonVersion")
-
-
-		// Swagger
-		implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
-		implementation("org.springdoc:springdoc-openapi-kotlin:$springdocOpenapiVersion")
 
 		compileOnly("org.projectlombok:lombok")
 		developmentOnly("org.springframework.boot:spring-boot-devtools")

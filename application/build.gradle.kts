@@ -3,11 +3,17 @@ import java.io.ByteArrayOutputStream
 group = rootProject.group
 version = rootProject.version
 
+val springdocOpenapiVersion: String by project
+
 val imageRegistry: String by project
 val serviceName: String by project
 
 dependencies {
     implementation(project(":service"))
+
+    // Swagger
+    implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
+    implementation("org.springdoc:springdoc-openapi-kotlin:$springdocOpenapiVersion")
 }
 
 jib {
