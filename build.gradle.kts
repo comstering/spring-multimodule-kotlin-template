@@ -9,6 +9,8 @@ val springCloudOpenFeignVersion: String by project
 val springCloudHystrixVersion: String by project
 val springCloudRibbonVersion: String by project
 val springCloudEurekaClientVersion: String by project
+val jacocoBranchCoverageRatio: String by project
+val jacocoLineCoverageRatio: String by project
 
 plugins {
 	id("org.springframework.boot")
@@ -121,13 +123,13 @@ subprojects {
 				limit {
 					counter = "BRANCH"
 					value = "COVEREDRATIO"
-					minimum = 0.80.toBigDecimal()
+					minimum = jacocoBranchCoverageRatio.toBigDecimal()
 				}
 
 				limit {
 					counter = "LINE"
 					value = "COVEREDRATIO"
-					minimum = 0.80.toBigDecimal()
+					minimum = jacocoLineCoverageRatio.toBigDecimal()
 				}
 
 				excludes = listOf<String>("**.DemoApplication**") + excludeJacocoClassNamePatterns
