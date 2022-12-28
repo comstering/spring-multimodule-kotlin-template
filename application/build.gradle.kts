@@ -10,6 +10,7 @@ val serviceName: String by project
 
 dependencies {
     implementation(project(":service"))
+    implementation(project(":infrastructure"))
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiVersion")
