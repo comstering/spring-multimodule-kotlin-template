@@ -8,7 +8,7 @@ This template is spring boot project template.
 
 This template use git flow strategy.
 
-[more about](.github/README.md)
+[more about](.github/workflows)
 
 ## Project structure
 
