@@ -176,7 +176,7 @@ tasks.register<JacocoReport>("jacocoAllReport") {
 				fileTree(it).apply {
 					exclude("**/DemoApplication**")
 					for (pattern in 'A' .. 'Z') {
-						exclude("**/${pattern}**")
+						exclude("**/Q${pattern}**")
 					}
 				}
 			}))
