@@ -1,5 +1,9 @@
 # Spring multi module project template
 
+[![Coverage Status](https://coveralls.io/repos/github/comstering/spring-multimodule-kotlin-template/badge.svg?branch=develop)](https://coveralls.io/github/comstering/spring-multimodule-kotlin-template?branch=develop)
+[![codecov](https://codecov.io/gh/comstering/spring-multimodule-kotlin-template/branch/develop/graph/badge.svg?token=IS7DDLA7F7)](https://codecov.io/gh/comstering/spring-multimodule-kotlin-template)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/comstering/spring-multimodule-kotlin-template/blob/develop/LICENSE)
+
 ## Description
 
 This template is spring boot project template.
