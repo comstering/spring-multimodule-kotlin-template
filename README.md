@@ -34,20 +34,13 @@ About infra.
 
 ### Domain
 
-About entities.
+About entities, and business logic.
 
 - Data entities
 - Entity domain logic
 - Domain Repository
-
-### Service
-
-About business.
-
-- Use domain interface
-    - implementation code will dependency Injection(i.e. JPA Repository)
-- Make interface to use service class
-    - implement in infrastructure(i.e.  use third party data)
+- Make interface for using service class
+  - implement in infrastructure(i.e. use third party data)
 
 ### Application
 
