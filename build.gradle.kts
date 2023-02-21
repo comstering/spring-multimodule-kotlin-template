@@ -59,9 +59,7 @@ subprojects {
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
 		// Spring
-		implementation("org.springframework.boot:spring-boot-starter-actuator")
 		implementation("org.springframework.boot:spring-boot-starter-validation")
-		implementation("org.springframework.boot:spring-boot-starter-web")
 
 		// Spring Cloud
 		implementation("org.springframework.cloud:spring-cloud-starter-openfeign:$springCloudOpenFeignVersion")
