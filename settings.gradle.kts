@@ -21,3 +21,4 @@ pluginManagement {
 include("infrastructure")
 include("domain")
 include("application")
+include("batch")
