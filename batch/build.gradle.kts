@@ -3,10 +3,10 @@ import java.io.ByteArrayOutputStream
 group = rootProject.group
 version = rootProject.version
 
-val springdocOpenapiVersion: String by project
+val springCloudTaskVersion: String by rootProject
 
-val imageRegistry: String by project
-val serviceName: String by project
+val imageRegistry: String by rootProject
+val serviceName: String by rootProject
 
 dependencies {
     implementation(project(":domain"))
@@ -14,6 +14,7 @@ dependencies {
 
     // Spring Batch
     implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("org.springframework.cloud:spring-cloud-starter-task:$springCloudTaskVersion")
 }
 
 jib {
