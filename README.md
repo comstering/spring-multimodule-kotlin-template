@@ -50,6 +50,13 @@ About api.
 - Graphql
 - (+ more UI View)
 
+### Batch
+
+About batch job.
+
+- Batch job
+- Use dataflow
+
 ### Util(Optional)
 
 About utils.
