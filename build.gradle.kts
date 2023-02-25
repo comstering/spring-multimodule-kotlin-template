@@ -2,6 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.ByteArrayOutputStream
 
 val groupName: String by project
+
+val queryDslVersion: String by project
+
 val kotestVersion: String by project
 val springMockkVersion: String by project
 
@@ -17,6 +20,8 @@ plugins {
 	id("io.spring.dependency-management")
 	kotlin("jvm")
 	kotlin("plugin.spring")
+	kotlin("plugin.jpa")
+	kotlin("kapt")
 	jacoco
 	id("com.github.kt3k.coveralls")
 	id("com.google.cloud.tools.jib")
@@ -29,6 +34,8 @@ allprojects {
 	apply {
 		plugin("kotlin")
 		plugin("kotlin-spring")
+		plugin("kotlin-jpa")
+		plugin("kotlin-kapt")
 		plugin("org.springframework.boot")
 		plugin("io.spring.dependency-management")
 		plugin("jacoco")
@@ -65,6 +72,11 @@ subprojects {
 		implementation("org.springframework.cloud:spring-cloud-starter-openfeign:$springCloudOpenFeignVersion")
 		implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix:$springCloudHystrixVersion")
 		implementation("org.springframework.cloud:spring-cloud-starter-netflix-ribbon:$springCloudRibbonVersion")
+
+		// JPA
+		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+		implementation("com.querydsl:querydsl-jpa:$queryDslVersion")
+		kapt("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
 
 		developmentOnly("org.springframework.boot:spring-boot-devtools")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
