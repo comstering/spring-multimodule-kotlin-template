@@ -11,7 +11,7 @@ service:
 
 ingress:
   hosts:
-    - host: staging-springboot.comstering.com
+    - host: springboot.comstering.com
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -19,8 +19,8 @@ ingress:
 
 resources:
   limits:
-    cpu: 0.5
-    memory: 256Mi
+    cpu: 2.0
+    memory: 1024Mi
 
   requests:
     cpu: 0.1
