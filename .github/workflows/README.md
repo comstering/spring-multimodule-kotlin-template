@@ -6,11 +6,11 @@
 
 | branch | description                                                                                                                                                                                          |
 | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| develop | <ul><li>default branch</li><li>build preview image</li><li>deploy preview</li></ul>                                                                                                                  |
+| develop | <ul><li>default branch</li><li>build dev image</li><li>deploy dev</li></ul>                                                                                                                          |
 | feature | <ul><li>branch off from develop</li><li>development feature</li><li>check only test</li><li>merge to develop</li></ul>                                                                               |
 | release | <ul><li>branch off from develop</li><li>build staging image</li><li>deploy staging</li><li>check from QA</li></ul>                                                                                   |
 | main | <ul><li>merge from release</li><li>build production image</li><li>deploy production</li></ul>                                                                                                        |
-| bugfix | <ul><li>branch off from develop</li><li>for fix if you found bug in preview</li><li>merge to develop</li></ul>                                                                                       |
+| bugfix | <ul><li>branch off from develop</li><li>for fix if you found bug in dev</li><li>merge to develop</li></ul>                                                                                           |
 | hotfix | <ul><li>branch off from main</li><li>for fix right now</li><ul><li>If service failure in production</li><li>If you found critical bug in production</li></ul><li>merge to main and develop</li></ul> |
 
 # Use service

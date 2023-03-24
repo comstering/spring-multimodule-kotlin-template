@@ -87,6 +87,6 @@ jobs:
     environment: staging
 
     steps:
-      - name: Deploy to preview
+      - name: Deploy to staging
         run: |
           echo '${{ github.sha }}'
